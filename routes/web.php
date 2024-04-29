@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Barangs;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,7 +57,7 @@ Route::get('product/{name}', function ($name) {
 
 // buat sebuah route dengan 3 buah parameter, nama, berat badan, tinggi badan
 Route::get('myself/{name}/{bb}/{tb}', function ($name, $bb, $tb) {
-    $bmi = $bb / (($tb / 100) *2);
+    $bmi = $bb / (($tb / 100) * 2);
     if ($bmi > 30) {
         $ket = "obesitas";
     } elseif ($bmi > 25) {
@@ -74,6 +76,18 @@ Route::get('myself/{name}/{bb}/{tb}', function ($name, $bb, $tb) {
 });
 
 // Route optional parameter -> ditandai dengan ?
-Route::get('myname/{nama?}', function($a = "Abdu"){
+Route::get('myname/{nama?}', function ($a = "Abdu") {
     return "Aku adalah $a";
+});
+
+//  menampilkan data dari database
+Route::get('/testmodel', function () {
+    $data = Post::all();
+    return $data;
+});
+
+//  menampilkan data dari database
+Route::get('/Barangs', function () {
+    $data = Barangs::all();
+    return $data;
 });
